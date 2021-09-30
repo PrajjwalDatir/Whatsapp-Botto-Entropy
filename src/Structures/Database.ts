@@ -2,7 +2,7 @@ import { Connection } from 'mongoose'
 import { UserModel, GroupModel, User, Group, connect, SessionModel, Session } from '../Database'
 import { ISession } from '../typings/Client'
 
-export class Database {
+export default class Database {
     private readonly DB = {
         user: UserModel,
         group: GroupModel,
@@ -11,8 +11,10 @@ export class Database {
 
     public connection?: Connection
 
-    public connect = async (url: string): Promise<void> => {
-        this.connection = await connect(url)
+    constructor(public url: string) {}
+
+    public connect = async (): Promise<void> => {
+        this.connection = await connect(this.url)
     }
 
     get connected(): boolean {

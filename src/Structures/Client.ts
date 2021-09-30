@@ -3,9 +3,9 @@ import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import { join } from 'path'
 import { IClientConfig, ISession, JID } from '../typings/Client'
-import { Database } from './Database'
+import Database from './Database'
 
-export class Client extends WAConnection {
+export default class Client extends WAConnection {
     qr?: string
 
     constructor(public config: IClientConfig, public database: Database) {
