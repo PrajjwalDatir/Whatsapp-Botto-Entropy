@@ -7,7 +7,7 @@
     "build": "rm -rf dist && tsc -p .",
     "start": "node dist/bot.js",
     "lint": "eslint \"src/**/*.ts\"",
-    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write"
+    "fmt": "prettier --config .prettierrc \"src/**/*.ts\" --write"
   },
   "keywords": [
     "botto"
