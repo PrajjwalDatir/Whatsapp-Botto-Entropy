@@ -1,0 +1,62 @@
+{
+  "name": "entropy",
+  "version": "1.0.0",
+  "description": "Well",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rm -rf dist && tsc -p .",
+    "start": "node dist/bot.js",
+    "lint": "eslint \"src/**/*.ts\"",
+    "prettier-format": "prettier --config .prettierrc \"src/**/*.ts\" --write"
+  },
+  "keywords": [
+    "botto"
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "@adiwajshing/baileys": "https://github.com/adiwajshing/baileys",
+    "@pkmn/img": "^0.1.9",
+    "@pkmn/sets": "^2.0.0",
+    "@typegoose/typegoose": "^7.6.3",
+    "@types/qr-image": "^3.2.4",
+    "@types/string-similarity": "^4.0.0",
+    "axios": "^0.21.1",
+    "canvacord": "^5.2.1",
+    "canvas": "^2.8.0",
+    "chalk": "^4.1.1",
+    "chess-image-generator-ts": "^1.0.0",
+    "chess-node": "^1.1.0",
+    "common-tags": "^1.8.0",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "fubuki": "^1.1.0",
+    "get-urls": "^10.0.0",
+    "gifencoder": "^2.0.1",
+    "jimp": "^0.16.1",
+    "moment": "^2.29.1",
+    "mongoose": "^5.13.3",
+    "node-cron": "^3.0.0",
+    "prettier": "^2.3.2",
+    "qr-image": "^3.2.0",
+    "spotifydl-core": "^0.2.0",
+    "string-similarity": "^4.0.4",
+    "tesseract.js": "^2.1.5",
+    "ultra-lyrics": "^1.1.1",
+    "uuid": "^3.4.0",
+    "wa-sticker-formatter": "^4.0.14",
+    "yt-search": "^2.10.0",
+    "ytdl-core": "^4.9.0"
+  },
+  "devDependencies": {
+    "@types/common-tags": "^1.8.1",
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.4.1",
+    "@types/node-cron": "^2.0.4",
+    "@types/uuid": "^8.3.1",
+    "@types/yt-search": "^2.3.2",
+    "@typescript-eslint/eslint-plugin": "^4.28.4",
+    "@typescript-eslint/parser": "^4.28.4",
+    "eslint": "^7.31.0",
+    "typescript": "^4.4.2"
+  }
+}
