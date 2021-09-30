@@ -1,6 +1,6 @@
 import express from 'express'
 import { imageSync } from 'qr-image'
-import { Client } from './Client'
+import Client from './Client'
 
 export class Server {
     private app = express()
@@ -11,6 +11,7 @@ export class Server {
             '/wa',
             (req, res, next) => {
                 const { session } = req.query
+                console.log(session)
                 if (typeof session !== 'string') return void res.status(400).json({ error: 'Invalid session' })
                 if (session !== this.client.config.session)
                     return void res.status(403).json({ error: 'Invalid session' })
