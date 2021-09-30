@@ -6,8 +6,11 @@ import { IClientConfig, ISession, JID } from '../typings/Client'
 import { Database } from './Database'
 
 export class Client extends WAConnection {
+    qr?: string
+
     constructor(public config: IClientConfig, public database: Database) {
         super()
+        this.on('qr', (qr) => (this.qr = qr))
     }
 
     public isMod = (jid: string | JID): boolean => this.config.mods.includes(jid)
