@@ -1,7 +1,7 @@
 node_modules
 dist
 .env
-*_session.json
+*_SESSION.json
 json.sqlite
 .vscode
 *.traineddata
