@@ -84,9 +84,9 @@ export default class Database {
     }
 
     public updateSession = async (sid: string, session: ISession): Promise<Session> => {
-        const data = await this.Session.findOneAndUpdate({ sid, session }, { $set: { updatedAt: new Date() } })
-        if (data) return data
-        return await this.addSession(sid, session)
+        const data = await this.Session.updateOne({ sid }, { $set: { updatedAt: new Date(), session } })
+        if (!data.nModified) await this.addSession(sid, session)
+        return (await this.getSession(sid)) as Session
     }
 
     public deleteSession = async (sid: string): Promise<Session | null> => {

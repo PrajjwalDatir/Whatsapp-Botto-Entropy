@@ -2,6 +2,7 @@ import Client from '../Structures/Client'
 import Message from '../Structures/Message'
 
 export interface IParsedArgs {
+    command: string
     args: string[]
     flags: Record<string, string>
     text: string

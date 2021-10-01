@@ -1,6 +1,5 @@
 import { MessageOptions, MessageType, WAMessage } from '@adiwajshing/baileys'
 import { GID, IUser, JID } from '../typings/Client'
-import { isTruthy } from '../utils'
 import Client from './Client'
 import Group from './Group'
 
@@ -40,7 +39,7 @@ class Message {
                 ? M?.message[type as MessageType.extendedText]?.contextInfo?.mentionedJid
                 : []) || []
 
-        array.filter(isTruthy).forEach((jid) => this.mentioned.push(jid))
+        array.filter(this.client.util.isTruthy).forEach((jid) => this.mentioned.push(jid))
     }
 
     public build = async (): Promise<this> => {
