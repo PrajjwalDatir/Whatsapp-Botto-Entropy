@@ -2,7 +2,7 @@ import { WAConnection } from '@adiwajshing/baileys'
 import { existsSync } from 'fs'
 import { readFile, writeFile } from 'fs/promises'
 import { join } from 'path'
-import { IClientConfig, ISession, JID } from '../typings/Client'
+import { IClientConfig, ISession, IUser, JID } from '../typings/Client'
 import Database from './Database'
 
 export default class Client extends WAConnection {
@@ -26,5 +26,14 @@ export default class Client extends WAConnection {
         if (!session) return undefined
         await writeFile(filename, JSON.stringify(session))
         return session
+    }
+
+    public getContact = (jid: string | JID): IUser => {
+        const { notify, vname, name } = this.contacts[jid]
+        return {
+            username: notify || vname || name || '',
+            jid,
+            isMod: this.isMod(jid)
+        }
     }
 }

@@ -36,3 +36,9 @@ export interface ISession {
     encKey: string
     macKey: string
 }
+
+export interface IUser {
+    username: string
+    jid: string
+    isMod: boolean
+}
