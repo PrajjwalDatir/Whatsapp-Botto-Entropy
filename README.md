@@ -53,12 +53,17 @@
 
 <div align="center">
 
-**[ABOUT PROJECT](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-about-project) • 
-[WIKI](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-wiki) • 
-[TECH STACK](https://Synthesized-Infinity/Whatsapp-Botto-Entropy#-tech-stack) • 
-[CONTRIBUTING](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#%EF%B8%8F-contributing) • 
-[SPREAD THE WORD](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-spread-the-word) • 
-[LICENSE](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#%EF%B8%8F-license)**
+--> [ABOUT PROJECT](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-about-project) <--
+
+• [WIKI](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-wiki) 
+
+• [TECH STACK](https://Synthesized-Infinity/Whatsapp-Botto-Entropy#-tech-stack) 
+
+• [CONTRIBUTING](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#%EF%B8%8F-contributing) 
+
+• [SPREAD THE WORD](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#-spread-the-word) 
+
+• [LICENSE](https://github.com/Synthesized-Infinity/Whatsapp-Botto-Entropy#%EF%B8%8F-license)
 
 </div>
 
@@ -82,7 +87,7 @@ Here's a brief high-level overview of the tech stack the WhatsApp Botto Entropy 
 - Built with [Baileys](https://github.com/adiwajshing/baileys/tree/multi-device) (The Best WhatsApp Library Out There)
 - Powered by [Express JS](https://expressjs.com/)
 - Database handled via [MongoDB](https://www.mongodb.com/)
-
+- Authentication UI [Codepen](https://codepen.io/samurai2099/pen/xxrjxjW)
 
 # ✍️ Contributing
 
