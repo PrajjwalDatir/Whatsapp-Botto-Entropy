@@ -7,6 +7,7 @@ import chalk from 'chalk'
 import Message from './Message'
 import EventEmitter from 'events'
 import { Boom } from '@hapi/boom'
+import { BAILEYS_METHODS } from '../Constants'
 
 export type Baileys = ReturnType<typeof create>
 
@@ -24,6 +25,12 @@ export default class Client extends EventEmitter implements Baileys {
 
     constructor(public config: IClientConfig, public database: Database, private sconfig: Partial<SocketConfig> = {}) {
         super()
+
+        for (const method of BAILEYS_METHODS) {
+            this[method] = (() => {
+                throw new Error(`${method} cannot be called without connecting`)
+            }) as Baileys[typeof method]
+        }
         this.ev = new EventEmitter()
     }
 
@@ -111,46 +118,46 @@ export default class Client extends EventEmitter implements Baileys {
         console.log(chalk.blue(new Date().toString()), chalk.green(`[${this.config.session}]`), ...args)
     }
 
-    /* Temp Implement Baileys */
-    public appPatch = ((): void => void null) as unknown as Baileys['appPatch']
-    public sendPresenceUpdate = ((): void => void null) as unknown as Baileys['sendPresenceUpdate']
-    public presenceSubscribe = ((): void => void null) as unknown as Baileys['presenceSubscribe']
-    public profilePictureUrl = ((): void => void null) as unknown as Baileys['profilePictureUrl']
-    public onWhatsApp = ((): void => void null) as unknown as Baileys['onWhatsApp']
-    public fetchBlocklist = ((): void => void null) as unknown as Baileys['fetchBlocklist']
-    public fetchPrivacySettings = ((): void => void null) as unknown as Baileys['fetchPrivacySettings']
-    public fetchStatus = ((): void => void null) as unknown as Baileys['fetchStatus']
-    public updateProfilePicture = ((): void => void null) as unknown as Baileys['updateProfilePicture']
-    public updateBlockStatus = ((): void => void null) as unknown as Baileys['updateBlockStatus']
-    public resyncState = ((): void => void null) as unknown as Baileys['resyncState']
-    public chatModify = ((): void => void null) as unknown as Baileys['chatModify']
-    public processMessage = ((): void => void null) as unknown as Baileys['processMessage']
-    public assertSession = ((): void => void null) as unknown as Baileys['assertSession']
-    public relayMessage = ((): void => void null) as unknown as Baileys['relayMessage']
-    public sendReadReceipt = ((): void => void null) as unknown as Baileys['sendReadReceipt']
-    public refreshMediaConn = ((): void => void null) as unknown as Baileys['refreshMediaConn']
-    public sendMessage = ((): void => void null) as unknown as Baileys['sendMessage']
-    public groupMetadata = ((): void => void null) as unknown as Baileys['groupMetadata']
-    public groupCreate = ((): void => void null) as unknown as Baileys['groupCreate']
-    public groupLeave = ((): void => void null) as unknown as Baileys['groupLeave']
-    public groupUpdateSubject = ((): void => void null) as unknown as Baileys['groupUpdateSubject']
-    public groupParticipantsUpdate = ((): void => void null) as unknown as Baileys['groupParticipantsUpdate']
-    public groupInviteCode = ((): void => void null) as unknown as Baileys['groupInviteCode']
-    public groupToggleEphemeral = ((): void => void null) as unknown as Baileys['groupToggleEphemeral']
-    public groupSettingUpdate = ((): void => void null) as unknown as Baileys['groupSettingUpdate']
-    public ws = ((): void => void null) as unknown as Baileys['ws']
-    public ev = ((): void => void null) as unknown as Baileys['ev']
-    public authState = ((): void => void null) as unknown as Baileys['authState']
-    public user = ((): void => void null) as unknown as Baileys['user']
-    public assertingPreKeys = ((): void => void null) as unknown as Baileys['assertingPreKeys']
-    public generateMessageTag = ((): void => void null) as unknown as Baileys['generateMessageTag']
-    public query = ((): void => void null) as unknown as Baileys['query']
-    public waitForMessage = ((): void => void null) as unknown as Baileys['waitForMessage']
-    public waitForSocketOpen = ((): void => void null) as unknown as Baileys['waitForSocketOpen']
-    public sendRawMessage = ((): void => void null) as unknown as Baileys['sendRawMessage']
-    public sendNode = ((): void => void null) as unknown as Baileys['sendNode']
-    public logout = ((): void => void null) as unknown as Baileys['logout']
-    public end = ((): void => void null) as unknown as Baileys['end']
-    public waitForConnectionUpdate = ((): void => void null) as unknown as Baileys['waitForConnectionUpdate']
-    public groupFetchAllParticipating = ((): void => void null) as Baileys['groupFetchAllParticipating']
+    /* Temp Baileys Implementation*/
+    public appPatch!: Baileys['appPatch']
+    public sendPresenceUpdate!: Baileys['sendPresenceUpdate']
+    public presenceSubscribe!: Baileys['presenceSubscribe']
+    public profilePictureUrl!: Baileys['profilePictureUrl']
+    public onWhatsApp!: Baileys['onWhatsApp']
+    public fetchBlocklist!: Baileys['fetchBlocklist']
+    public fetchPrivacySettings!: Baileys['fetchPrivacySettings']
+    public fetchStatus!: Baileys['fetchStatus']
+    public updateProfilePicture!: Baileys['updateProfilePicture']
+    public updateBlockStatus!: Baileys['updateBlockStatus']
+    public resyncState!: Baileys['resyncState']
+    public chatModify!: Baileys['chatModify']
+    public processMessage!: Baileys['processMessage']
+    public assertSession!: Baileys['assertSession']
+    public relayMessage!: Baileys['relayMessage']
+    public sendReadReceipt!: Baileys['sendReadReceipt']
+    public refreshMediaConn!: Baileys['refreshMediaConn']
+    public sendMessage!: Baileys['sendMessage']
+    public groupMetadata!: Baileys['groupMetadata']
+    public groupCreate!: Baileys['groupCreate']
+    public groupLeave!: Baileys['groupLeave']
+    public groupUpdateSubject!: Baileys['groupUpdateSubject']
+    public groupParticipantsUpdate!: Baileys['groupParticipantsUpdate']
+    public groupInviteCode!: Baileys['groupInviteCode']
+    public groupToggleEphemeral!: Baileys['groupToggleEphemeral']
+    public groupSettingUpdate!: Baileys['groupSettingUpdate']
+    public ws: Baileys['ws']
+    public ev: Baileys['ev']
+    public authState!: Baileys['authState']
+    public user!: Baileys['user']
+    public assertingPreKeys!: Baileys['assertingPreKeys']
+    public generateMessageTag!: Baileys['generateMessageTag']
+    public query!: Baileys['query']
+    public waitForMessage!: Baileys['waitForMessage']
+    public waitForSocketOpen!: Baileys['waitForSocketOpen']
+    public sendRawMessage!: Baileys['sendRawMessage']
+    public sendNode!: Baileys['sendNode']
+    public logout!: Baileys['logout']
+    public end!: Baileys['end']
+    public waitForConnectionUpdate!: Baileys['waitForConnectionUpdate']
+    public groupFetchAllParticipating!: Baileys['groupFetchAllParticipating']
 }
