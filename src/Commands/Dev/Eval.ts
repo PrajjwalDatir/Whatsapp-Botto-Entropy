@@ -6,13 +6,13 @@ import { IParsedArgs } from '../../typings/Command'
 @Command('eval', {
     aliases: ['run'],
     category: 'Dev',
+    mod : true,
     description: {
         content: 'For Super Users.'
     }
 })
 export default class extends BaseCommand {
     override execute = async (M: Message, parsedArgs: IParsedArgs): Promise<void> => {
-        if (!this.client.config.mods?.includes(M.sender.jid)) return void null
         let out: string
         try {
             const output = eval(parsedArgs.text) || 'Executed Javascript!'
