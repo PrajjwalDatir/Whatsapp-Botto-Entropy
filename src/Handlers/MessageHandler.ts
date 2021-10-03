@@ -48,7 +48,7 @@ export class MessageHandler {
         if (command.options.group && !M.group) return void M.reply(`Command \`${command.id}\` is a group command.`)
         if (command.options.group && command.options.admin && !M.isAdminMessage)
             return void M.reply(`Command \`${command.id}\` is a group command and requires admin permissions.`)
-        if (command.options.mod && M.sender.isMod) return void M.reply(`Command \`${command.id}\` is a mod command.`)
+        if (command.options.mod && !M.sender.isMod) return void M.reply(`Command \`${command.id}\` is a mod command.`)
         this.execute(command, M, args)
     }
     private parseArgs = (raw: string): IParsedArgs => {
