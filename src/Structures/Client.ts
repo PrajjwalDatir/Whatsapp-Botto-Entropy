@@ -152,4 +152,5 @@ export default class Client extends EventEmitter implements Baileys {
     public logout = ((): void => void null) as unknown as Baileys['logout']
     public end = ((): void => void null) as unknown as Baileys['end']
     public waitForConnectionUpdate = ((): void => void null) as unknown as Baileys['waitForConnectionUpdate']
+    public groupFetchAllParticipating = ((): void => void null) as Baileys['groupFetchAllParticipating']
 }
