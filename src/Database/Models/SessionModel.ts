@@ -1,6 +1,5 @@
 import { getModelForClass, Prop } from '@typegoose/typegoose'
 import { Document } from 'mongoose'
-import { ISession } from '../../typings/Client'
 
 class SessionSchema {
     @Prop({
@@ -11,10 +10,10 @@ class SessionSchema {
     public sid?: string
 
     @Prop({
-        type: Object,
+        type: String,
         required: true
     })
-    public session?: ISession
+    public session?: string
 }
 
 export type Session = SessionSchema & Document
