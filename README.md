@@ -87,7 +87,9 @@ Here's a brief high-level overview of the tech stack the WhatsApp Botto Entropy 
 - Built with [Baileys](https://github.com/adiwajshing/baileys/tree/multi-device) (The Best WhatsApp Library Out There)
 - Powered by [Express JS](https://expressjs.com/)
 - Database handled via [MongoDB](https://www.mongodb.com/)
-- Authentication UI [Codepen](https://codepen.io/samurai2099/pen/xxrjxjW)
+
+## 😳 Additional Assets
+- Authentication UI [Source Code on Codepen](https://codepen.io/samurai2099/pen/xxrjxjW)
 
 # ✍️ Contributing
 
