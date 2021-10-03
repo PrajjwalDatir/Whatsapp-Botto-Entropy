@@ -1,11 +1,11 @@
-import { WAGroupMetadata } from '@adiwajshing/baileys'
+import { GroupMetadata } from '@adiwajshing/baileys'
 
 export interface IGroup {
     /** Group Title */
     title: string
 
     /** Group Metadata */
-    metadata: WAGroupMetadata
+    metadata: GroupMetadata
 
     /** Group Participants */
     participants: string[]
