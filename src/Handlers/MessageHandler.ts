@@ -11,7 +11,7 @@ export class MessageHandler {
     public readonly aliases = new Map<string, BaseCommand>()
     public readonly categories = new Array<ICategories>()
 
-    constructor(private path: string, private client: Client) {}
+    constructor(private path: string, public client: Client) {}
 
     public execute = async (command: BaseCommand, M: Message, args: IParsedArgs): Promise<void> => {
         if (!this.cooldowns.has(command.id)) this.cooldowns.set(command.id, new Map())
