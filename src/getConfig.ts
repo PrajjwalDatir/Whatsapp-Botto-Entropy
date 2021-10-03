@@ -14,4 +14,4 @@ const getConfig = (): IClientConfig => {
     }
 }
 
-export default getConfig()
+export default getConfig
