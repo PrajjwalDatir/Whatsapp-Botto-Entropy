@@ -1,10 +1,10 @@
-import { MessageOptions, MessageType, WAMessage } from '@adiwajshing/baileys'
+import { AnyMessageContent, MessageType, WAMessage, MiscMessageGenerationOptions } from '@adiwajshing/baileys'
 import { GID, IUser, JID } from '../typings/Client'
 import Client from './Client'
 import Group from './Group'
 
 class Message {
-    private supportedMediaMessages = [MessageType.image, MessageType.video]
+    public supportedMediaMessages = new Array<MessageType>('imageMessage', 'videoMessage')
 
     public content: string
 
@@ -17,26 +17,27 @@ class Message {
     public readonly isAdminMessage = false
 
     constructor(private M: WAMessage, private client: Client) {
-        this.sender = this.client.getContact(this.chat === 'dm' ? this.from : this.M.participant)
+        this.sender = this.client.getContact(this.chat === 'dm' ? this.from : (this.M.key.participant as string))
+        if (M.pushName) this.sender.username = M.pushName
         if (M.message?.ephemeralMessage) this.M.message = M.message.ephemeralMessage.message
         const { type } = this
         this.content = ((): string => {
             if (this.M.message?.buttonsResponseMessage)
                 return this.M.message?.buttonsResponseMessage?.selectedDisplayText || ''
             if (this.M.message?.listResponseMessage) return this.M.message?.listResponseMessage?.title || ''
-            return type === MessageType.text && this.M.message?.conversation
+            return this.M.message?.conversation
                 ? this.M.message.conversation
                 : this.supportedMediaMessages.includes(type)
                 ? this.supportedMediaMessages
-                      .map((type) => this.M.message?.[type as MessageType.image | MessageType.video]?.caption)
+                      .map((type) => this.M.message?.[type as 'imageMessage' | 'videoMessage']?.caption)
                       .filter((caption) => caption)[0] || ''
-                : type === MessageType.extendedText && this.M.message?.extendedTextMessage?.text
+                : this.M.message?.extendedTextMessage?.text
                 ? this.M.message?.extendedTextMessage.text
                 : ''
         })()
         const array =
-            (M?.message?.[type as MessageType.extendedText]?.contextInfo?.mentionedJid
-                ? M?.message[type as MessageType.extendedText]?.contextInfo?.mentionedJid
+            (M?.message?.[type as 'extendedTextMessage']?.contextInfo?.mentionedJid
+                ? M?.message[type as 'extendedTextMessage']?.contextInfo?.mentionedJid
                 : []) || []
 
         array.filter(this.client.util.isTruthy).forEach((jid) => this.mentioned.push(jid))
@@ -62,11 +63,18 @@ class Message {
 
     public reply = async (
         content: string | Buffer,
-        type: MessageType = MessageType.text,
-        options: MessageOptions = {}
+        type: 'text' | 'image' | 'audio' | 'video' = 'text',
+        options: MiscMessageGenerationOptions = {}
     ): ReturnType<typeof this.client.sendMessage> => {
         options.quoted = this.M
-        return this.client.sendMessage(this.from, content, type, options)
+        if (type === 'text' && Buffer.isBuffer(content)) throw new Error('Cannot send a Buffer as a text message')
+        return this.client.sendMessage(
+            this.from,
+            {
+                [type]: content
+            } as unknown as AnyMessageContent,
+            options
+        )
     }
 }
 

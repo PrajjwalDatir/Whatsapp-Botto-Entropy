@@ -1,6 +1,5 @@
 import { Connection } from 'mongoose'
 import { UserModel, GroupModel, User, Group, connect, SessionModel, Session } from '../Database'
-import { ISession } from '../typings/Client'
 
 export default class Database {
     private readonly DB = {
@@ -17,19 +16,19 @@ export default class Database {
         this.connection = await connect(this.url)
     }
 
-    get connected(): boolean {
+    public get connected(): boolean {
         return this.connection?.readyState === 1
     }
 
-    get Session(): typeof SessionModel {
+    public get Session(): typeof SessionModel {
         return this.DB.session
     }
 
-    get User(): typeof UserModel {
+    public get User(): typeof UserModel {
         return this.DB.user
     }
 
-    get Group(): typeof GroupModel {
+    public get Group(): typeof GroupModel {
         return this.DB.group
     }
 
@@ -79,14 +78,14 @@ export default class Database {
         return await this.Session.find({})
     }
 
-    public addSession = async (sid: string, session: ISession): Promise<Session> => {
+    public addSession = async (sid: string, session: string): Promise<Session> => {
         return await new this.Session({ sid, session }).save()
     }
 
-    public updateSession = async (sid: string, session: ISession): Promise<Session> => {
-        const data = await this.Session.updateOne({ sid }, { $set: { updatedAt: new Date(), session } })
-        if (!data.nModified) await this.addSession(sid, session)
-        return (await this.getSession(sid)) as Session
+    public updateSession = async (sid: string, session: string): Promise<Session> => {
+        const s = await this.getSession(sid)
+        if (s) return await s.update({ session })
+        return await this.addSession(sid, session)
     }
 
     public deleteSession = async (sid: string): Promise<Session | null> => {

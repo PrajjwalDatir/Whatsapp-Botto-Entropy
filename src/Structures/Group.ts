@@ -1,4 +1,4 @@
-import { WAGroupMetadata } from '@adiwajshing/baileys'
+import { GroupMetadata } from '@adiwajshing/baileys'
 import { GID } from '../typings/Client'
 import { IGroup } from '../typings/Message'
 import Client from './Client'
@@ -15,12 +15,12 @@ export default class Group implements IGroup {
     build = async (): Promise<this> => {
         this.metadata = await this.client.groupMetadata(this.gid)
         this.title = this.metadata.subject
-        for (const { jid, isAdmin } of this.metadata.participants) {
-            if (isAdmin) this.admins.push(jid)
-            this.participants.push(jid)
+        for (const { id, isAdmin } of this.metadata.participants) {
+            if (isAdmin) this.admins.push(id)
+            this.participants.push(id)
         }
         return this
     }
 
-    metadata!: WAGroupMetadata
+    metadata!: GroupMetadata
 }
